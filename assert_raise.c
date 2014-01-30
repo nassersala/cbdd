@@ -3,8 +3,8 @@
 #include <assert.h>
 #include <stdio.h>
 
-Except_T SomeException = { "Some Exception" };
-Except_T AnotherException = { "Another Exception" };
+extern Except_T SomeException;
+extern Except_T AnotherException;
 
 enum handled {
   Not_hanlded = 0,

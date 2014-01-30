@@ -9,6 +9,8 @@
   printf("%s\n", #fn_name);\
   fn_name();
 
+Except_T SomeException = { "Some Exception" };
+Except_T AnotherException = { "Another Exception" };
 
 
 /*--------------spec_tests--------*/
@@ -20,11 +22,10 @@ void test_that_it_can_pass() {
 }
 
 void test_that_it_can_fail() {
-  extern Except_T SomeException;
   describe("some thing", ^{
     assert_raise(SomeException, ^{
       it("fails", ^{
-       RAISE(SomeException);
+        RAISE(SomeException);
       });
     });
   });
