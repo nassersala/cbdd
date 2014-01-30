@@ -16,8 +16,8 @@ Except_T AnotherException = { "Another Exception" };
 /*--------------spec_tests--------*/
 void test_that_it_can_pass() {
   describe("some thing", ^{
-    //it("has some property", ^{
-    //});
+    it("has some property", ^{
+    });
   });
 }
 
