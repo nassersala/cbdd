@@ -1,9 +1,9 @@
 #include "spec.h"
 
-void describe(const char *string, Block block) {
+void describe(const char *string, void (^block)()) {
   block();
 }
 
-void it(const char *string, Block block) {
+void it(const char *string, void (^block)()) {
   block();
 }

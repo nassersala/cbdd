@@ -1,8 +1,5 @@
-//#include "except.h"
 #include <stdio.h>
-
 #include "spec.h"
-
 #include "assert_raise.h"
 
 #define run_test(fn_name)\

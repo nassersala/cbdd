@@ -1,6 +1,2 @@
-#include <Block.h>
-
-typedef void (^Block)();
-
-void describe(const char *string, Block block);
-void it(const char *string, Block block);
+void describe(const char *string, void (^block)());
+void it(const char *string, void (^block)());

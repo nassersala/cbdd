@@ -1,4 +1,3 @@
-
 #include "assert_raise.h"
 #include <assert.h>
 #include <stdio.h>
