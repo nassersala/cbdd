@@ -1,6 +1,6 @@
 #include "spec.h"
+//assert.h is needed otherwise it will use Except_t assert
 #include <assert.h>
-#include "assert_raise.h"
 
 #include <execinfo.h>
 #include <stdio.h>
@@ -26,10 +26,17 @@ void print_stack_trace() {
 }
 
 void expect_equal(int lhs, int rhs) {
-  extern Except_T NOT_EQUAL_EXCEPTION;
   if(lhs != rhs) {
     print_stack_trace();
-    RAISE(NOT_EQUAL_EXCEPTION);
- //   assert(0 && "TESTO");
+    assert(0 && "Expected equal integers but were not");
   }
 }
+
+void expect_equal_string(const char* lhs, const char* rhs) {
+  if (strcmp(lhs, rhs) != 0) { 
+    /* string are not matching */
+    print_stack_trace();
+    assert(0 && "Expected equal strings but were not");
+  }
+}
+

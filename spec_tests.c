@@ -31,25 +31,29 @@ void test_that_it_can_fail() {
 }
 
 void test_expect_equal() {
-  int x = 1;
-  int y = 3;
+  /*this should blow up when uncomented. don't forget to recoment it*/
+  //expect_equal(1, 99);
+  expect_equal(1, 1);
+}
 
-  assert_raise(NOT_EQUAL_EXCEPTION, ^{
-      expect_equal(x, y);
-  });
+void test_expect_equal_string() {
+  /*this should blow up when uncomented. don't forget to recoment it*/
+  //expect_equal_string("Hello", "Goodbuy");
+  expect_equal_string("Hello", "Hello");
 }
 
 void foo() {
-  //expect_equal(2, 2);
+  //expect_equal(3, 2);
 }
 
 int main() {
-//  foo();
+  foo();
 
   run_test(test_that_it_can_pass);
   run_test(test_that_it_can_fail);
 
   run_test(test_expect_equal);
+  run_test(test_expect_equal_string);
 
   puts("\nOK");
   return 0;
