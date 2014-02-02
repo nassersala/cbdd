@@ -32,13 +32,10 @@ build:
 # The Unit Tests
 .PHONY: tests
 tests: CFLAGS += $(TARGET)
-tests: $(TESTS)
+tests: tests/*.h tests/*.c
 	$(CC) -o tests/TESTOUTPUT tests/assert.c tests/assert_raise.c tests/except.c \
-		tests/spec_tests.c src/spec.c
+		tests/spec_tests.c $(TARGET)
 	./tests/TESTOUTPUT
-
-valgrind:
-	VALGRIND="valgrind --log-file=/tmp/valgrind-%p.log" $(MAKE)
 
 # The Cleaner
 clean:
