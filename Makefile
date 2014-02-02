@@ -5,11 +5,10 @@ PREFIX?=/usr/local
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
-#TEST_SRC=$(wildcard tests/*_tests.c)
-#TESTS=$(patsubst %.c,%,$(TEST_SRC)) 
-
 TARGET=build/libYOUR_LIBRARY.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
+
+LIB_HEADER= src/spec.h
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests
@@ -29,7 +28,7 @@ build:
 	@mkdir -p build
 	@mkdir -p bin
 
-# The Unit Tests
+# Unit Tests
 .PHONY: tests
 tests: CFLAGS += $(TARGET)
 tests: tests/*.h tests/*.c
@@ -48,6 +47,8 @@ clean:
 install: all
 	install -d $(DESTDIR)/$(PREFIX)/lib/
 	install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
+	install -d $(DESTDIR)/$(PREFIX)/include/
+	install $(LIB_HEADER) $(DESTDIR)/$(PREFIX)/include/
 
 # The Checker
 BADFUNCS='[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)|stpn?cpy|a?sn?printf|byte_)'
