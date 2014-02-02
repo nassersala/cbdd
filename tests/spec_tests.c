@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "spec.h"
+#include "../src/spec.h"
 #include "assert_raise.h"
 #include <assert.h>
 
@@ -33,7 +33,7 @@ void test_that_it_can_fail() {
 void test_expect_equal() {
   /*this should blow up when uncomented. Don't forget to recoment it*/
   //expect_equal(1, 99);
-  expect_equal(2, 1);
+  expect_equal(1, 1);
 }
 
 void test_expect_equal_string() {

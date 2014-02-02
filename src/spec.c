@@ -1,6 +1,7 @@
 #include "spec.h"
 //assert.h is needed otherwise it will use Except_t assert
 #include <assert.h>
+#include <string.h>
 
 #include <execinfo.h>
 #include <stdio.h>
