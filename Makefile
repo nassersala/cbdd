@@ -5,10 +5,10 @@ PREFIX?=/usr/local
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
 
-TARGET=build/libYOUR_LIBRARY.a
+TARGET=build/libcbdd.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
-LIB_HEADER= src/spec.h
+LIB_HEADER= src/cbdd.h
 
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests

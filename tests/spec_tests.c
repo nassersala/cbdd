@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../src/spec.h"
+#include "../src/cbdd.h"
 #include "assert_raise.h"
 #include <assert.h>
 
