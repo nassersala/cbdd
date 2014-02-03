@@ -33,7 +33,7 @@ build:
 tests: CFLAGS += $(TARGET)
 tests: tests/*.h tests/*.c
 	$(CC) -o tests/TESTOUTPUT tests/assert.c tests/assert_raise.c tests/except.c \
-		tests/spec_tests.c $(TARGET)
+		tests/cbdd_tests.c $(TARGET)
 	./tests/TESTOUTPUT
 
 # The Cleaner

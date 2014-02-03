@@ -43,12 +43,10 @@ void test_expect_equal_string() {
 }
 
 void foo() {
-  //expect_equal(3, 2);
   expect_equal_string("nasser", "nasser");
 }
 
 int main() {
-  //foo();
 
   run_test(test_that_it_can_pass);
   run_test(test_that_it_can_fail);

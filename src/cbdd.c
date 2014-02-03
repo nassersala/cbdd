@@ -16,15 +16,15 @@ void it(const char *string, void (^block)()) {
 
 void expect_equal(int lhs, int rhs) {
   if(lhs != rhs) {
-    //_print_stack_trace();
+    printf("FAILED\n");
     assert(0 && "Expected equal integers but were not");
+  } else {
+    printf("FAILED\n");
   }
 }
 
 void expect_equal_string(const char* lhs, const char* rhs) {
   if (0 != strcmp(lhs, rhs))  { 
-    /* string are not matching */
-    //_print_stack_trace();
     assert(0 && "Expected equal strings but were not");
   }
 }
