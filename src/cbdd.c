@@ -9,7 +9,6 @@ void describe(const char *string, void (^block)()) {
 }
 
 void it(const char *string, void (^block)()) {
-  printf("%s\n", string);
   block();
   printf(" - OK\n");
 }
@@ -19,7 +18,7 @@ void expect_equal(int lhs, int rhs) {
     printf("FAILED\n");
     assert(0 && "Expected equal integers but were not");
   } else {
-    printf("FAILED\n");
+    printf("PASSED\n");
   }
 }
 
