@@ -9,6 +9,7 @@ void describe(const char *string, void (^block)()) {
 }
 
 void it(const char *string, void (^block)()) {
+  printf("%s\n", string);
   block();
   printf(" - OK\n");
 }
