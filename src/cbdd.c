@@ -11,20 +11,19 @@ void Displayer_display_example_name(const char* example) {
   displays_example_name_before_it_block(example);
 }
 
-void Displayer_display_example_failed(int lhs, int rhs) {
-  //printf(ANSI_COLOR_RED    "FAILED"     ANSI_COLOR_RESET "\n");
-  //printf(ANSI_COLOR_RED    "expected: %d\n got:%d"     ANSI_COLOR_RESET "\n", rhs, lhs);
+void Displayer_display_example_failed(int actual, int expected) {
+  displays_expect_equal_failed(actual, expected);
 }
 
 void Displayer_display_example_passed() {
-  //printf(ANSI_COLOR_GREEN    "PASSED "     ANSI_COLOR_RESET "\n");
+  displays_expect_equal_passed();
 }
 
 void expect_equal_failed(int lhs, int rhs) {
     Displayer_display_example_failed(lhs, rhs);
 }
 
-void expect_equal_passed(int lhs, int rhs) {
+void expect_equal_passed() {
     Displayer_display_example_passed();
 }
 
@@ -42,7 +41,7 @@ void expect_equal(int lhs, int rhs) {
   if(lhs != rhs) {
     expect_equal_failed(lhs, rhs);
   } else {
-    expect_equal_passed(lhs, rhs);
+    expect_equal_passed();
   }
 }
 
