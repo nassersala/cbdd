@@ -31,14 +31,10 @@ void test_that_it_can_fail() {
 }
 
 void test_expect_equal() {
-  /*this should blow up when uncomented. Don't forget to recoment it*/
-  //expect_equal(1, 99);
   expect_equal(1, 1);
 }
 
 void test_expect_equal_string() {
-  /*this should blow up when uncomented. Don't forget to recoment it*/
-  //expect_equal_string("Hello", "Goodbuy");
   expect_equal_string("Hello", "Hello");
 }
 
