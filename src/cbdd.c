@@ -2,17 +2,12 @@
 //assert.h is needed otherwise it will use Except_t assert
 #include <assert.h>
 #include <string.h>
-
 #include "displayer.h"
 
 static void (^before_block)();
 
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
-
-int _get_EXPECTATION_FALIED() {
-  return EXPECTATION_FAILED;
-}
 
 /* Displyer is a 'role' that can be played by any module that implements
  * displayer.h inteface */
@@ -42,6 +37,21 @@ void expect_equal_passed() {
   Displayer_display_example_passed();
 }
 
+void expect_equal(int lhs, int rhs) {
+  if(lhs != rhs) {
+    expect_equal_failed(lhs, rhs);
+  } else {
+    expect_equal_passed();
+  }
+}
+
+void expect_equal_string(const char* lhs, const char* rhs) {
+  if (0 != strcmp(lhs, rhs))  { 
+    assert(0 && "Expected equal strings but were not");
+  }
+}
+
+/*------spec functions--------*/
 void describe(const char *string, void (^block)()) {
   Displayer_display_describe_name(string);
   block();
@@ -57,17 +67,7 @@ void before_each(void (^block)()) {
   before_block = block;
 }
 
-void expect_equal(int lhs, int rhs) {
-  if(lhs != rhs) {
-    expect_equal_failed(lhs, rhs);
-  } else {
-    expect_equal_passed();
-  }
+/*-------private functions------*/
+int _get_EXPECTATION_FALIED() {
+  return EXPECTATION_FAILED;
 }
-
-void expect_equal_string(const char* lhs, const char* rhs) {
-  if (0 != strcmp(lhs, rhs))  { 
-    assert(0 && "Expected equal strings but were not");
-  }
-}
-

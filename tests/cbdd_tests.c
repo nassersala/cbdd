@@ -6,7 +6,7 @@
 #define run_test(fn_name)\
   printf("%s\n", #fn_name);\
   fn_name();\
-  printf("\n", #fn_name);\
+  printf("\n");
 
 Except_T SomeException = { "Some Exception" };
 Except_T AnotherException = { "Another Exception" };
