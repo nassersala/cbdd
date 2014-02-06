@@ -5,8 +5,19 @@
 
 #include "displayer.h"
 
+//used by the tests only
+static int EXPECTATION_FAILED = 0;
+
+int _get_EXPECTATION_FALIED() {
+  return EXPECTATION_FAILED;
+}
+
 /* Displyer is a 'role' that can be played by any module that implements
- * displayer.h inteface */ 
+ * displayer.h inteface */
+void Displayer_display_describe_name(const char* desc) {
+  displays_describe_name_before_describe_block(desc);
+}
+
 void Displayer_display_example_name(const char* example) {
   displays_example_name_before_it_block(example);
 }
@@ -20,15 +31,17 @@ void Displayer_display_example_passed() {
 }
 
 void expect_equal_failed(int lhs, int rhs) {
-    Displayer_display_example_failed(lhs, rhs);
+  EXPECTATION_FAILED = 1;
+  Displayer_display_example_failed(lhs, rhs);
 }
 
 void expect_equal_passed() {
-    Displayer_display_example_passed();
+  EXPECTATION_FAILED = 0;
+  Displayer_display_example_passed();
 }
 
 void describe(const char *string, void (^block)()) {
-  printf("%s\n", string);
+  Displayer_display_describe_name(string);
   block();
 }
 
