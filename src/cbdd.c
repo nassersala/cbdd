@@ -5,6 +5,8 @@
 
 #include "displayer.h"
 
+static void (^before_block)();
+
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
 
@@ -46,8 +48,13 @@ void describe(const char *string, void (^block)()) {
 }
 
 void it(const char *string, void (^block)()) {
+  if(before_block) before_block();
   Displayer_display_example_name(string);
   block();
+}
+
+void before_each(void (^block)()) {
+  before_block = block;
 }
 
 void expect_equal(int lhs, int rhs) {

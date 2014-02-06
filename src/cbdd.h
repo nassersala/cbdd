@@ -1,5 +1,6 @@
 void describe(const char *string, void (^block)());
 void it(const char *string, void (^block)());
+void before_each(void (^block)());
 
 /*----expectations------*/
 void expect_equal(int lhs, int rhs);
