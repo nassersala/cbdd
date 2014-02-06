@@ -4,10 +4,10 @@
 #include <string.h>
 #include "displayer.h"
 
-static void (^before_block)();
-
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
+
+static void (^before_block)();
 
 /* Displyer is a 'role' that can be played by any module that implements
  * displayer.h inteface */
