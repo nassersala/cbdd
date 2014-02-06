@@ -26,3 +26,8 @@ void displays_expect_equal_passed() {
   printf(ANSI_COLOR_GREEN  "PASSED "   ANSI_COLOR_RESET "\n");
 }
 
+void displays_refute_equal_failed(int actual, int expected) {
+  printf(ANSI_COLOR_RED  "FAILED"  ANSI_COLOR_RESET "\n");
+  printf(ANSI_COLOR_RED  "expected %d and %d not to be equal"  ANSI_COLOR_RESET "\n", expected, actual);
+}
+

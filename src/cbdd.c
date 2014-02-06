@@ -19,7 +19,7 @@ void Displayer_display_example_name(const char* example) {
   displays_example_name_before_it_block(example);
 }
 
-void Displayer_display_example_failed(int actual, int expected) {
+void Displayer_display_expect_equal_failed(int actual, int expected) {
   displays_expect_equal_failed(actual, expected);
 }
 
@@ -27,9 +27,13 @@ void Displayer_display_example_passed() {
   displays_expect_equal_passed();
 }
 
+void Displayer_display_refute_equal_failed(int actual, int expected) {
+  displays_refute_equal_failed(actual, expected);
+}
+
 void expect_equal_failed(int lhs, int rhs) {
   EXPECTATION_FAILED = 1;
-  Displayer_display_example_failed(lhs, rhs);
+  Displayer_display_expect_equal_failed(lhs, rhs);
 }
 
 void expect_equal_passed() {
@@ -42,6 +46,24 @@ void expect_equal(int lhs, int rhs) {
     expect_equal_failed(lhs, rhs);
   } else {
     expect_equal_passed();
+  }
+}
+
+void refute_equal_failed(int lhs, int rhs) {
+  EXPECTATION_FAILED = 1;
+  Displayer_display_refute_equal_failed(lhs, rhs);
+}
+
+void refute_equal_passed() {
+  EXPECTATION_FAILED = 0;
+  Displayer_display_example_passed();
+}
+
+void refute_equal(int lhs, int rhs) {
+  if(lhs != rhs) {
+    refute_equal_passed();
+  } else {
+    refute_equal_failed(lhs, rhs);
   }
 }
 

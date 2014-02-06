@@ -34,21 +34,21 @@ void test_that_it_can_fail() {
 void test_before_each_runs_before_every_it_block() {
   __block int global_state = 0;;
   describe("test for before_each", ^{
-      before_each(^{
-        global_state = 99;
-      });
+    before_each(^{
+      global_state = 99;
+    });
 
-      it("change global_state", ^{
-        global_state = 1;
-      });
+    it("change global_state", ^{
+      global_state = 1;
+    });
 
-      it("should have the initial value", ^{
-        assert(99 == global_state);
-      });
+    it("should have the initial value", ^{
+      assert(99 == global_state);
+    });
   });
 }
 
-/*------expections tests---------*/
+/*------expectations tests---------*/
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
   assert(0 == _get_EXPECTATION_FALIED());
@@ -56,6 +56,16 @@ void test_expect_equal_can_pass() {
 
 void test_expect_equal_can_fail() {
   expect_equal(99, 1);
+  assert(1 == _get_EXPECTATION_FALIED());
+}
+
+void test_refute_equal_can_pass() {
+  refute_equal(99, 1);
+  assert(0 == _get_EXPECTATION_FALIED());
+}
+
+void test_refute_equal_can_fail() {
+  refute_equal(99, 99);
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
@@ -70,10 +80,11 @@ int main() {
   run_test(test_that_it_can_fail);
   run_test(test_before_each_runs_before_every_it_block);
 
-
-/*------expections tests---------*/
+/*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
   run_test(test_expect_equal_can_fail);
+  run_test(test_refute_equal_can_pass);
+  run_test(test_refute_equal_can_fail);
   run_test(test_expect_equal_string);
   
   //run_test(test_refute_equal_string);
