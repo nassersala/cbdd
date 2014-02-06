@@ -48,6 +48,24 @@ void test_before_each_runs_before_every_it_block() {
   });
 }
 
+void test_before_each_only_runs_within_its_describe_context() {
+  __block int global_state = 1001;
+  describe("test for before_each should only run within its conext", ^{
+      before_each(^{
+        global_state = 99;
+      });
+    it("", ^{
+      assert(99 == global_state);
+    });
+  });
+
+  describe("anohter describe block", ^{
+    it("should not see the outside before_each", ^{
+      assert(99 != global_state);
+    });
+  });
+}
+
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
@@ -79,6 +97,7 @@ int main() {
   run_test(test_that_it_can_pass);
   run_test(test_that_it_can_fail);
   run_test(test_before_each_runs_before_every_it_block);
+  run_test(test_before_each_only_runs_within_its_describe_context);
 
 /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
