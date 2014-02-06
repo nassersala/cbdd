@@ -9,25 +9,31 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+static void color_print(const char* color, const char* text) {
+  printf("%s%s"ANSI_COLOR_RESET"\n", color, text);
+}
+
 void  displays_describe_name_before_describe_block(const char* desc) {
-  printf(ANSI_COLOR_CYAN    "%s"     ANSI_COLOR_RESET "\n", desc);
+  color_print(ANSI_COLOR_MAGENTA, desc);
 }
 
 void displays_example_name_before_it_block(const char* example) {
-  printf("%s\n", example);
+  color_print(ANSI_COLOR_RESET, example);
 }
 
 void displays_expect_equal_failed(int actual, int expected) {
-  printf(ANSI_COLOR_RED  "FAILED"  ANSI_COLOR_RESET "\n");
-  printf(ANSI_COLOR_RED  "expected: %d\n got:%d"  ANSI_COLOR_RESET "\n", expected, actual);
+  char text[80];
+  sprintf(text, "FAILED\nexpected: %d\ngot: %d", expected, actual);
+  color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_expect_equal_passed() {
-  printf(ANSI_COLOR_GREEN  "PASSED "   ANSI_COLOR_RESET "\n");
+  color_print(ANSI_COLOR_GREEN, "PASSED");
 }
 
 void displays_refute_equal_failed(int actual, int expected) {
-  printf(ANSI_COLOR_RED  "FAILED"  ANSI_COLOR_RESET "\n");
-  printf(ANSI_COLOR_RED  "expected %d and %d not to be equal"  ANSI_COLOR_RESET "\n", expected, actual);
+  char text[80];
+  sprintf(text, "FAILED\nexpected (%d) and (%d) not to be equal", expected, actual);
+  color_print(ANSI_COLOR_RED, text);
 }
 
