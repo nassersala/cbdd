@@ -21,9 +21,9 @@ void displays_example_name_before_it_block(const char* example) {
   color_print(ANSI_COLOR_RESET, example);
 }
 
-void displays_expect_equal_failed(int actual, int expected) {
+void displays_expect_equal_failed(int exp, int act, const char*file, int line) {
   char text[80];
-  sprintf(text, "FAILED\nexpected: %d\ngot: %d", expected, actual);
+  sprintf(text, "FAILED\nexpected: %d\ngot: %d\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 

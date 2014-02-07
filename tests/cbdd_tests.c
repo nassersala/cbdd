@@ -74,6 +74,7 @@ void test_before_each_only_runs_within_its_describe_context() {
 
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
+  puts("--------------------------");
   expect_equal(1, 1);
   assert(0 == _get_EXPECTATION_FALIED());
 }

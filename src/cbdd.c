@@ -19,8 +19,8 @@ void Displayer_display_example_name(const char* example) {
   displays_example_name_before_it_block(example);
 }
 
-void Displayer_display_expect_equal_failed(int actual, int expected) {
-  displays_expect_equal_failed(actual, expected);
+void Displayer_display_expect_equal_failed(int exp, int act, const char*file, int line) {
+  displays_expect_equal_failed(exp, act, file, line );
 }
 
 void Displayer_display_example_passed() {
@@ -31,9 +31,9 @@ void Displayer_display_refute_equal_failed(int actual, int expected) {
   displays_refute_equal_failed(actual, expected);
 }
 
-void expect_equal_failed(int lhs, int rhs) {
+void expect_equal_failed(int exp, int act, const char*file, int line) {
   EXPECTATION_FAILED = 1;
-  Displayer_display_expect_equal_failed(lhs, rhs);
+  Displayer_display_expect_equal_failed(exp, act, file, line);
 }
 
 void expect_equal_passed() {
@@ -41,9 +41,9 @@ void expect_equal_passed() {
   Displayer_display_example_passed();
 }
 
-void expect_equal(int lhs, int rhs) {
-  if(lhs != rhs) {
-    expect_equal_failed(lhs, rhs);
+void _expect_equal(long exp, long act, const char* file, int line) {
+  if (exp != act) {
+    expect_equal_failed(exp, act, file, line);
   } else {
     expect_equal_passed();
   }

@@ -3,7 +3,9 @@ void it(const char *string, void (^block)());
 void before_each(void (^block)());
 
 /*----expectations------*/
-void expect_equal(int lhs, int rhs);
+void _expect_equal(long exp, long act, const char* file, int line);
+#define expect_equal(exp, act) _expect_equal(exp, act, __FILE__, __LINE__)
+
 void expect_equal_string(const char* lhs, const char* rhs);
 
 /*--------private functions--------*/
