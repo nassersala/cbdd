@@ -56,10 +56,16 @@ void test_before_each_only_runs_within_its_describe_context() {
       });
     it("", ^{
       assert(99 == global_state);
+      global_state = 101;
+    });
+
+    it("", ^{
+      assert(99 == global_state);
+      global_state = 101;
     });
   });
 
-  describe("anohter describe block", ^{
+  describe("outside describe block", ^{
     it("should not see the outside before_each", ^{
       assert(99 != global_state);
     });
