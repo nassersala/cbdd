@@ -36,4 +36,3 @@ void displays_refute_equal_failed(long actual, long expected, const char*file, i
   sprintf(text, "FAILED\nexpected (%ld) and (%ld) not to be equal\n%s:%d", expected, actual, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
-

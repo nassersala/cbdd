@@ -31,13 +31,14 @@ void test_that_it_can_fail() {
 }
 
 void test_before_each_runs_before_every_it_block() {
-  __block int global_state = 0;;
+  __block int global_state = 0;
   describe("test for before_each", ^{
     before_each(^{
       global_state = 99;
     });
 
     it("change global_state", ^{
+      assert(99 == global_state);
       global_state = 1;
     });
 
@@ -69,6 +70,20 @@ void test_before_each_only_runs_within_its_describe_context() {
       assert(99 != global_state);
     });
   });
+}
+
+void test_after_each_runs_after_every_it_block() { 
+  __block int global_state = 1001;
+  describe("test for after_each", ^{
+    after_each(^{
+      global_state = 22;
+    });
+
+    it("", ^{
+      global_state = 101;
+    });
+  });
+  assert(22 == global_state);
 }
 
 /*------expectations tests---------*/
@@ -103,6 +118,7 @@ int main() {
   run_test(test_that_it_can_fail);
   run_test(test_before_each_runs_before_every_it_block);
   run_test(test_before_each_only_runs_within_its_describe_context);
+  run_test(test_after_each_runs_after_every_it_block);
 
   /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
