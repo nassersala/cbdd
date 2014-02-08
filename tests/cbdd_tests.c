@@ -3,15 +3,14 @@
 #include "assert_raise.h"
 #include <assert.h>
 
-#define run_test(fn_name)\
-  printf("%s\n", #fn_name);\
-  fn_name();\
+#define run_test(function_name)\
+  printf("%s\n", #function_name);\
+  function_name();\
   printf("\n");
 
 Except_T SomeException = { "Some Exception" };
 Except_T AnotherException = { "Another Exception" };
 Except_T NOT_EQUAL_EXCEPTION = { "lhs does not equal rhs" };
-
 
 /*--------------spec_tests--------*/
 void test_that_it_can_pass() {
@@ -74,7 +73,6 @@ void test_before_each_only_runs_within_its_describe_context() {
 
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
-  puts("--------------------------");
   expect_equal(1, 1);
   assert(0 == _get_EXPECTATION_FALIED());
 }
@@ -100,13 +98,13 @@ void test_expect_equal_string() {
 
 int main() {
 
-/*------spec tests---------*/
+  /*---------spec tests---------*/
   run_test(test_that_it_can_pass);
   run_test(test_that_it_can_fail);
   run_test(test_before_each_runs_before_every_it_block);
   run_test(test_before_each_only_runs_within_its_describe_context);
 
-/*------expectations tests---------*/
+  /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
   run_test(test_expect_equal_can_fail);
   run_test(test_refute_equal_can_pass);

@@ -27,16 +27,27 @@ void Displayer_display_example_passed() {
   displays_expect_equal_passed();
 }
 
-void Displayer_display_refute_equal_failed(int actual, int expected) {
-  displays_refute_equal_failed(actual, expected);
+void Displayer_display_refute_equal_failed(int exp, int act, const char*file, int line) {
+  displays_refute_equal_failed(exp, act, file, line);
 }
 
-void expect_equal_failed(int exp, int act, const char*file, int line) {
+/*-------expectations func------*/
+void expect_equal_failed(long exp, long act, const char*file, int line) {
   EXPECTATION_FAILED = 1;
   Displayer_display_expect_equal_failed(exp, act, file, line);
 }
 
 void expect_equal_passed() {
+  EXPECTATION_FAILED = 0;
+  Displayer_display_example_passed();
+}
+
+void refute_equal_failed(long exp, long act, const char* file, int line) {
+  EXPECTATION_FAILED = 1;
+  Displayer_display_refute_equal_failed(exp, act, file, line);
+}
+
+void refute_equal_passed() {
   EXPECTATION_FAILED = 0;
   Displayer_display_example_passed();
 }
@@ -49,21 +60,12 @@ void _expect_equal(long exp, long act, const char* file, int line) {
   }
 }
 
-void refute_equal_failed(int lhs, int rhs) {
-  EXPECTATION_FAILED = 1;
-  Displayer_display_refute_equal_failed(lhs, rhs);
-}
 
-void refute_equal_passed() {
-  EXPECTATION_FAILED = 0;
-  Displayer_display_example_passed();
-}
-
-void refute_equal(int lhs, int rhs) {
-  if(lhs != rhs) {
+void _refute_equal(long exp, long act, const char* file, int line) {
+  if(exp != act) {
     refute_equal_passed();
   } else {
-    refute_equal_failed(lhs, rhs);
+    refute_equal_failed(exp, act, file, line);
   }
 }
 

@@ -21,9 +21,9 @@ void displays_example_name_before_it_block(const char* example) {
   color_print(ANSI_COLOR_RESET, example);
 }
 
-void displays_expect_equal_failed(int exp, int act, const char*file, int line) {
+void displays_expect_equal_failed(long exp, long act, const char*file, int line) {
   char text[80];
-  sprintf(text, "FAILED\nexpected: %d\ngot: %d\n%s:%d", exp, act, file, line);
+  sprintf(text, "FAILED\nexpected: %ld\ngot: %ld\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
@@ -31,9 +31,9 @@ void displays_expect_equal_passed() {
   color_print(ANSI_COLOR_GREEN, "PASSED");
 }
 
-void displays_refute_equal_failed(int actual, int expected) {
+void displays_refute_equal_failed(long actual, long expected, const char*file, int line) {
   char text[80];
-  sprintf(text, "FAILED\nexpected (%d) and (%d) not to be equal", expected, actual);
+  sprintf(text, "FAILED\nexpected (%ld) and (%ld) not to be equal\n%s:%d", expected, actual, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
