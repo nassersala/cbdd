@@ -1,9 +1,12 @@
-CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
+CC=clang
+CFLAGS=-g -O2 -Wall -fblocks -Wextra -Isrc -rdynamic -DNDEBUG $(OPTFLAGS)
 LIBS=-ldl $(OPTLIBS)
 PREFIX?=/usr/local
 
 SOURCES=$(wildcard src/**/*.c src/*.c)
 OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
+
+TEST_SOURCE=$(wildcard tests/**/*.c tests/*.c)
 
 TARGET=build/libcbdd.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
@@ -11,7 +14,7 @@ SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 LIB_HEADER= src/cbdd.h
 
 # The Target Build
-all: $(TARGET) $(SO_TARGET) tests
+all: $(TARGET) $(SO_TARGET)
 
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all
@@ -28,12 +31,11 @@ build:
 	@mkdir -p build
 	@mkdir -p bin
 
-# Unit Tests
+# Unit Tests 
 .PHONY: tests
 tests: CFLAGS += $(TARGET)
 tests: tests/*.h tests/*.c
-	$(CC) -o tests/TESTOUTPUT tests/assert.c tests/assert_raise.c tests/except.c \
-		tests/cbdd_tests.c $(TARGET)
+	$(CC) -fblocks -o tests/TESTOUTPUT $(TEST_SOURCE) $(TARGET) 
 	./tests/TESTOUTPUT
 
 # The Cleaner
