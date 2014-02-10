@@ -107,8 +107,14 @@ void test_refute_equal_can_fail() {
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
-void test_expect_equal_string() {
+void test_expect_equal_string_can_pass() {
   expect_equal_string("Hello", "Hello");
+  assert(0 == _get_EXPECTATION_FALIED());
+}
+
+void test_expect_equal_string_can_fail() {
+  expect_equal_string("Hello", "Salam");
+  assert(1 == _get_EXPECTATION_FALIED());
 }
 
 int main() {
@@ -125,7 +131,8 @@ int main() {
   run_test(test_expect_equal_can_fail);
   run_test(test_refute_equal_can_pass);
   run_test(test_refute_equal_can_fail);
-  run_test(test_expect_equal_string);
+  run_test(test_expect_equal_string_can_pass);
+  run_test(test_expect_equal_string_can_fail);
   
   //run_test(test_refute_equal_string);
   //run_test(test_refute_equal);

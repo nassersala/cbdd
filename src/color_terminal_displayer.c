@@ -21,18 +21,25 @@ void displays_example_name_before_it_block(const char* example) {
   color_print(ANSI_COLOR_RESET, example);
 }
 
+void displays_example_passed() {
+  color_print(ANSI_COLOR_GREEN, "PASSED");
+}
+
 void displays_expect_equal_failed(long exp, long act, const char*file, int line) {
   char text[80];
   sprintf(text, "FAILED\nexpected: %ld\ngot: %ld\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
-void displays_expect_equal_passed() {
-  color_print(ANSI_COLOR_GREEN, "PASSED");
-}
 
 void displays_refute_equal_failed(long actual, long expected, const char*file, int line) {
   char text[80];
   sprintf(text, "FAILED\nexpected (%ld) and (%ld) not to be equal\n%s:%d", expected, actual, file, line);
+  color_print(ANSI_COLOR_RED, text);
+}
+
+void displays_string_equal_failed(const char*exp, const char*act, const char*file, int line) {
+  char text[80];
+  sprintf(text, "FAILED\nexpected: %s\ngot: %s\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
