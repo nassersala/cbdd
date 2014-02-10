@@ -13,6 +13,9 @@ void _refute_equal(long exp, long act, const char* file, int line);
 void _expect_equal_string(const char *exp, const char* act, const char* file, int line);
 #define expect_equal_string(exp, act) _expect_equal_string(exp, act, __FILE__, __LINE__)
 
+void _refute_equal_string(const char *exp, const char* act, const char* file, int line);
+#define refute_equal_string(exp, act) _refute_equal_string(exp, act, __FILE__, __LINE__)
+
 /*--------private functions--------*/
 //this is used by the lib tests
 int _get_EXPECTATION_FALIED();
