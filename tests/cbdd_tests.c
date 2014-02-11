@@ -126,16 +126,22 @@ void test_expect_equal_string_can_fail() {
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
-//todo: adds null tests
 void test_refute_equal_string_can_pass() {
   refute_equal_string("Hello", "Salam");
   assert(0 == _get_EXPECTATION_FALIED());
 }
 
-//todo: adds null tests
 void test_refute_equal_string_can_fail() {
   refute_equal_string("Salam", "Salam");
-  refute_equal_string("", "");
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  refute_equal_string(NULL, "Salam");
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  refute_equal_string("Salam", NULL);
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  refute_equal_string(NULL, NULL);
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
