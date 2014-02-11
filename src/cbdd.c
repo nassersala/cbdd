@@ -20,12 +20,12 @@ void Displayer_display_example_name(const char* example) {
   displays_example_name_before_it_block(example);
 }
 
-void Displayer_display_expect_equal_failed(int exp, int act, const char*file, int line) {
-  displays_expect_equal_failed(exp, act, file, line);
-}
-
 void Displayer_display_example_passed() {
   displays_example_passed();
+}
+
+void Displayer_display_expect_equal_failed(int exp, int act, const char*file, int line) {
+  displays_expect_equal_failed(exp, act, file, line);
 }
 
 void Displayer_display_refute_equal_failed(int exp, int act, const char*file, int line) {
@@ -81,8 +81,15 @@ void _refute_equal(long exp, long act, const char* file, int line) {
   }
 }
 
+int is_equal_string(const char* lhs, const char* rhs) {
+  return (0 == strcmp(lhs, rhs));
+}
+
 void _expect_equal_string(const char* exp, const char* act, const char *file, int line) {
-  if (0 != strcmp(exp, act))  { 
+  if ((exp == NULL && act != NULL) ||
+      (exp != NULL && act == NULL) ||
+      (exp == NULL && act == NULL) ||
+      (exp && act && !is_equal_string(exp, act)))  { 
     expect_equal_string_failed(exp, act, file, line);
   } else {
     expectation_passed();
@@ -90,7 +97,7 @@ void _expect_equal_string(const char* exp, const char* act, const char *file, in
 }
 
 void _refute_equal_string(const char* exp, const char* act, const char *file, int line) {
-  if (0 == strcmp(exp, act))  { 
+  if (is_equal_string(exp, act))  { 
     refute_equal_string_failed(exp, act, file, line);
   } else {
     expectation_passed();

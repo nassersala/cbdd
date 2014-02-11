@@ -46,6 +46,6 @@ void displays_string_equal_failed(const char*exp, const char*act, const char*fil
 
 void displays_string_refute_failed(const char*exp, const char*act, const char*file, int line) {
   char text[80];
-  sprintf(text, "FAILED\nexpected (%s) not to equal (%s)\n%s:%d", exp, act, file, line);
+  sprintf(text, "FAILED\nexpected \"%s\" not to equal \"%s\"\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
