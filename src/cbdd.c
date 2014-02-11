@@ -85,10 +85,14 @@ int is_equal_string(const char* lhs, const char* rhs) {
   return (0 == strcmp(lhs, rhs));
 }
 
+int either_or_both_is_null(const char*exp, const char* act) {
+  return ((exp == NULL && act != NULL) ||
+          (exp != NULL && act == NULL) ||
+          (exp == NULL && act == NULL));
+}
+
 void _expect_equal_string(const char* exp, const char* act, const char *file, int line) {
-  if ((exp == NULL && act != NULL) ||
-      (exp != NULL && act == NULL) ||
-      (exp == NULL && act == NULL) ||
+  if (either_or_both_is_null(exp, act) ||
       (exp && act && !is_equal_string(exp, act)))  { 
     expect_equal_string_failed(exp, act, file, line);
   } else {
@@ -121,7 +125,7 @@ void it(const char *string, void (^block)()) {
 void before_each(void (^block)()) {
   before_block = block;
 }
- 
+
 void after_each(void (^block)()) {
   after_block = block;
 }
