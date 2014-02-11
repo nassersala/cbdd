@@ -90,20 +90,30 @@ void test_after_each_runs_after_every_it_block() {
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
   assert(0 == _get_EXPECTATION_FALIED());
+
+  expect_equal(NULL, NULL);
+  assert(0 == _get_EXPECTATION_FALIED());
 }
 
 void test_expect_equal_can_fail() {
   expect_equal(99, 1);
   assert(1 == _get_EXPECTATION_FALIED());
+
+  expect_equal(NULL, 1);
+  assert(1 == _get_EXPECTATION_FALIED());
 }
 
 void test_refute_equal_can_pass() {
   refute_equal(99, 1);
+  refute_equal(NULL, 99);
   assert(0 == _get_EXPECTATION_FALIED());
 }
 
 void test_refute_equal_can_fail() {
   refute_equal(99, 99);
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  refute_equal(NULL, NULL);
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
