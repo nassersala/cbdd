@@ -111,7 +111,12 @@ void test_expect_equal_can_fail() {
 
 void test_refute_equal_can_pass() {
   refute_equal(99, 1);
+  assert(0 == _get_EXPECTATION_FALIED());
+
   refute_equal(NULL, 99);
+  assert(0 == _get_EXPECTATION_FALIED());
+
+  refute_equal('n', 'z');
   assert(0 == _get_EXPECTATION_FALIED());
 }
 
@@ -120,6 +125,9 @@ void test_refute_equal_can_fail() {
   assert(1 == _get_EXPECTATION_FALIED());
 
   refute_equal(NULL, NULL);
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  refute_equal('z', 'z');
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
@@ -161,6 +169,19 @@ void test_refute_equal_string_can_fail() {
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
+void test_expect_true_can_pass() {
+  expect_true(1);
+  assert(0 == _get_EXPECTATION_FALIED());
+}
+
+void test_expect_true_can_fail() {
+  expect_true(0);
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  expect_true(NULL);
+  assert(1 == _get_EXPECTATION_FALIED());
+}
+
 int main() {
 
   /*---------spec tests---------*/
@@ -179,6 +200,8 @@ int main() {
   run_test(test_expect_equal_string_can_fail);
   run_test(test_refute_equal_string_can_pass);
   run_test(test_refute_equal_string_can_fail);
+  run_test(test_expect_true_can_pass);
+  run_test(test_expect_true_can_fail);
   
   //run_test(test_expect_match);
   //run_test(test_refute_match);

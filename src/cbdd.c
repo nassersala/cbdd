@@ -39,6 +39,10 @@ void Displayer_display_string_equal_failed(const char*exp, const char*act, const
 void  Displayer_display_refute_equal_string_failed(const char*exp, const char*act, const char*file, int line) {
   displays_string_refute_failed(exp, act, file, line);
 }
+void Displayer_display_expect_true_failed(int act, const char*file, int line) {
+  displays_expect_true_failed(act, file, line);
+}
+
 /*-------expectations func------*/
 void expect_equal_failed(long exp, long act, const char*file, int line) {
   EXPECTATION_FAILED = 1;
@@ -58,6 +62,11 @@ void expect_equal_string_failed(const char* exp, const char* act, const char*fil
 void refute_equal_string_failed(const char* exp, const char* act, const char *file, int line) { 
   EXPECTATION_FAILED = 1;
   Displayer_display_refute_equal_string_failed(exp, act, file, line);
+}
+
+void expect_true_failed(int act, const char*file, int line) {
+  EXPECTATION_FAILED = 1;
+  Displayer_display_expect_true_failed(act, file, line);
 }
 
 void expectation_passed()  {
@@ -102,6 +111,14 @@ void _refute_equal_string(const char* exp, const char* act, const char* file, in
   if (either_or_both_is_null(exp, act) || is_equal_string(exp, act))  { 
     refute_equal_string_failed(exp, act, file, line);
   } else {
+    expectation_passed();
+  }
+}
+
+void _expect_true(int act, const char* file, int line) {
+  if((act) == 0)  {
+    expect_true_failed(act, file, line);
+  }else {
     expectation_passed();
   }
 }

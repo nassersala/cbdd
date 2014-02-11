@@ -49,3 +49,9 @@ void displays_string_refute_failed(const char*exp, const char*act, const char*fi
   sprintf(text, "FAILED\nexpected \"%s\" not to equal \"%s\"\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
+
+void displays_expect_true_failed(int act, const char*file, int line) {
+  char text[80];
+  sprintf(text, "FAILED\nexpected %d to be true, got false\n%s:%d", act, file, line);
+  color_print(ANSI_COLOR_RED, text);
+}
