@@ -185,6 +185,17 @@ void test_expect_true_can_fail() {
 void test_expect_false_can_pass() {
   expect_false(0);
   assert(0 == _get_EXPECTATION_FALIED());
+
+  expect_false(NULL);
+  assert(0 == _get_EXPECTATION_FALIED());
+}
+
+void test_expect_false_can_fail() {
+  expect_false(99);
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  expect_false("Salam");
+  assert(1 == _get_EXPECTATION_FALIED());
 }
 
 int main() {
@@ -208,6 +219,7 @@ int main() {
   run_test(test_expect_true_can_pass);
   run_test(test_expect_true_can_fail);
   run_test(test_expect_false_can_pass);
+  run_test(test_expect_false_can_fail);
   
   //run_test(test_expect_match);
   //run_test(test_refute_match);
