@@ -55,3 +55,9 @@ void displays_expect_true_failed(int act, const char*file, int line) {
   sprintf(text, "FAILED\nexpected %d to be true, got false\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
+
+void displays_expect_false_failed(int act, const char*file, int line) {
+  char text[80];
+  sprintf(text, "FAILED\nexpected %d to be false, got true\n%s:%d", act, file, line);
+  color_print(ANSI_COLOR_RED, text);
+}

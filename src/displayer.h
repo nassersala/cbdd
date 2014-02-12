@@ -10,3 +10,4 @@ void displays_string_equal_failed(const char*exp, const char*act, const char*fil
 void displays_string_refute_failed(const char*exp, const char*act, const char*file, int line);
 
 void displays_expect_true_failed(int act, const char*file, int line);
+void displays_expect_false_failed(int act, const char*file, int line);

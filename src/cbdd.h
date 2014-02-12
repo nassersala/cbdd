@@ -19,6 +19,9 @@ void _refute_equal_string(const char *exp, const char* act, const char* file, in
 void _expect_true(int act, const char* file, int line);
 #define expect_true(act) _expect_true(act, __FILE__, __LINE__)
 
+void _expect_false(int act, const char* file, int line);
+#define expect_false(act) _expect_false(act, __FILE__, __LINE__)
+
 /*--------private functions--------*/
 //this is used by the lib tests
 int _get_EXPECTATION_FALIED();
