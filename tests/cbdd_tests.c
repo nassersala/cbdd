@@ -198,8 +198,23 @@ void test_expect_false_can_fail() {
   assert(1 == _get_EXPECTATION_FALIED());
 }
 
-int main() {
+void test_expect_null_can_pass() {
+  expect_null(NULL);
+  assert(0 == _get_EXPECTATION_FALIED());
+}
 
+void test_expect_null_can_fail() {
+  expect_null("Hello");
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  expect_null("");
+  assert(1 == _get_EXPECTATION_FALIED());
+
+  expect_null(10);
+  assert(1 == _get_EXPECTATION_FALIED());
+}
+
+int main() {
   /*---------spec tests---------*/
   run_test(test_that_it_can_pass);
   run_test(test_that_it_can_fail);
@@ -220,6 +235,8 @@ int main() {
   run_test(test_expect_true_can_fail);
   run_test(test_expect_false_can_pass);
   run_test(test_expect_false_can_fail);
+  run_test(test_expect_null_can_pass);
+  run_test(test_expect_null_can_fail);
   
   //run_test(test_expect_match);
   //run_test(test_refute_match);

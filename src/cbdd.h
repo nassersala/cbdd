@@ -22,6 +22,9 @@ void _expect_true(int act, const char* file, int line);
 void _expect_false(int act, const char* file, int line);
 #define expect_false(act) _expect_false(act, __FILE__, __LINE__)
 
+void _expect_null(void *act, const char* file, int line);
+#define expect_null(act) _expect_null(act, __FILE__, __LINE__)
+
 /*--------private functions--------*/
 //this is used by the lib tests
 int _get_EXPECTATION_FALIED();
