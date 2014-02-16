@@ -214,6 +214,16 @@ void test_expect_null_can_fail() {
   assert(cbdd_expectation_failed());
 }
 
+void test_refute_null_can_pass() {
+  refute_null(99);
+  assert(!cbdd_expectation_failed());
+}
+
+void test_refute_null_can_fail() {
+  refute_null(NULL);
+  assert(cbdd_expectation_failed());
+}
+
 int main() {
   /*---------spec tests---------*/
   run_test(test_that_it_can_pass);
@@ -237,6 +247,8 @@ int main() {
   run_test(test_expect_false_can_fail);
   run_test(test_expect_null_can_pass);
   run_test(test_expect_null_can_fail);
+  run_test(test_refute_null_can_pass);
+  run_test(test_refute_null_can_fail);
   
   //run_test(test_expect_match);
   //run_test(test_refute_match);

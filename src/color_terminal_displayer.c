@@ -68,3 +68,9 @@ void displays_expect_null_failed(void *act, const char*file, int line) {
   sprintf(text, "FAILED\nexpected %p to point to NULL\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
+
+void displays_refute_null_failed(void *act, const char* file, int line) {
+  char text[80];
+  sprintf(text, "FAILED\nunexpected null\ngot: %p\n%s:%d", act, file, line);
+  color_print(ANSI_COLOR_RED, text);
+}

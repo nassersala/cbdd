@@ -51,6 +51,10 @@ void Displayer_display_expect_null_failed(void *act, const char*file, int line) 
   displays_expect_null_failed(act, file, line);
 }
 
+void  Displayer_display_refute_null_failed(void *act, const char* file, int line) {
+  displays_refute_null_failed(act, file, line);
+}
+
 /*-------expectations func------*/
 void expect_equal_failed(long exp, long act, const char*file, int line) {
   EXPECTATION_FAILED = 1;
@@ -77,7 +81,7 @@ void expect_true_failed(int act, const char*file, int line) {
   Displayer_display_expect_true_failed(act, file, line);
 }
 
-void expect_false_failed(int act, const char*file, int line){
+void expect_false_failed(int act, const char*file, int line) {
   EXPECTATION_FAILED = 1;
   Displayer_display_expect_false_failed(act, file, line);
 }
@@ -85,6 +89,11 @@ void expect_false_failed(int act, const char*file, int line){
 void expect_null_failed(void *act, const char* file, int line) {
   EXPECTATION_FAILED = 1;
   Displayer_display_expect_null_failed(act, file, line);
+}
+
+void refute_null_failed(void *act, const char* file, int line) {
+  EXPECTATION_FAILED = 1;
+  Displayer_display_refute_null_failed(act, file, line);
 }
 
 void expectation_passed()  {
@@ -152,6 +161,14 @@ void _expect_false(int act, const char* file, int line) {
 void _expect_null(void *act, const char* file, int line) {
   if((act) != NULL) {
     expect_null_failed(act, file, line);
+  } else {
+    expectation_passed();
+  }
+}
+
+void _refute_null(void *act, const char* file, int line) {
+  if((act) == NULL) {
+    refute_null_failed(act, file, line);
   } else {
     expectation_passed();
   }

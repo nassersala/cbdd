@@ -13,3 +13,4 @@ void displays_expect_true_failed(int act, const char*file, int line);
 void displays_expect_false_failed(int act, const char*file, int line);
 
 void displays_expect_null_failed(void *act, const char*file, int line);
+void displays_refute_null_failed(void *act, const char* file, int line);
