@@ -18,11 +18,12 @@ void  displays_describe_name_before_describe_block(const char* desc) {
 }
 
 void displays_example_name_before_it_block(const char* example) {
+  printf("- ");
   color_print(ANSI_COLOR_RESET, example);
 }
 
 void displays_example_passed() {
-  color_print(ANSI_COLOR_GREEN, "PASSED");
+  //color_print(ANSI_COLOR_GREEN, "PASSED");
 }
 
 void displays_expect_equal_failed(long exp, long act, const char*file, int line) {

@@ -89,129 +89,129 @@ void test_after_each_runs_after_every_it_block() {
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 
   expect_equal(NULL, NULL);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 
   expect_equal('z', 'z');
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_expect_equal_can_fail() {
   expect_equal(99, 1);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_equal(NULL, 1);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_equal('n', 'z');
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_refute_equal_can_pass() {
   refute_equal(99, 1);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 
   refute_equal(NULL, 99);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 
   refute_equal('n', 'z');
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_refute_equal_can_fail() {
   refute_equal(99, 99);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   refute_equal(NULL, NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   refute_equal('z', 'z');
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_expect_equal_string_can_pass() {
   expect_equal_string("Hello", "Hello");
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_expect_equal_string_can_fail() {
   expect_equal_string("Hello", "Salam");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_equal_string(NULL, "Salam");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_equal_string( "Salam", NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_equal_string(NULL, NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_refute_equal_string_can_pass() {
   refute_equal_string("Hello", "Salam");
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_refute_equal_string_can_fail() {
   refute_equal_string("Salam", "Salam");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   refute_equal_string(NULL, "Salam");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   refute_equal_string("Salam", NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   refute_equal_string(NULL, NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_expect_true_can_pass() {
   expect_true(1);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_expect_true_can_fail() {
   expect_true(0);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_true(NULL);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_expect_false_can_pass() {
   expect_false(0);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 
   expect_false(NULL);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_expect_false_can_fail() {
   expect_false(99);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_false("Salam");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 void test_expect_null_can_pass() {
   expect_null(NULL);
-  assert(0 == _get_EXPECTATION_FALIED());
+  assert(!cbdd_expectation_failed());
 }
 
 void test_expect_null_can_fail() {
   expect_null("Hello");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_null("");
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 
   expect_null(10);
-  assert(1 == _get_EXPECTATION_FALIED());
+  assert(cbdd_expectation_failed());
 }
 
 int main() {

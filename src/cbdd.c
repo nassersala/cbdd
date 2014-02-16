@@ -181,6 +181,6 @@ void after_each(void (^block)()) {
 }
 
 /*-------private functions------*/
-int _get_EXPECTATION_FALIED() {
+int cbdd_expectation_failed() {
   return EXPECTATION_FAILED;
 }
