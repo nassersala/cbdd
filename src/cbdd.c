@@ -1,3 +1,17 @@
+/* Copyright 2014, Nasser Ali Alzahrani @nassersala
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+
+ * http://www.apache.org/licenses/LICENSE-2.0
+
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
 #include "cbdd.h"
 //assert.h is needed otherwise it will use Except_t assert
 #include <assert.h>
@@ -121,8 +135,8 @@ int is_equal_string(const char* lhs, const char* rhs) {
 
 int either_or_both_is_null(const char* exp, const char* act) {
   return ((exp == NULL && act != NULL) ||
-          (exp != NULL && act == NULL) ||
-          (exp == NULL && act == NULL));
+      (exp != NULL && act == NULL) ||
+      (exp == NULL && act == NULL));
 }
 
 void _expect_equal_string(const char* exp, const char* act, const char* file, int line) {
