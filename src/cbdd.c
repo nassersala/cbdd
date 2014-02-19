@@ -102,19 +102,17 @@ void expectation_passed()  {
 }
 
 void _expect_equal(long exp, long act, const char* file, int line) {
-  if (exp != act) {
-    expect_equal_failed(exp, act, file, line);
-  } else {
+  if (exp == act)
     expectation_passed();
-  }
+  else
+    expect_equal_failed(exp, act, file, line);
 }
 
 void _refute_equal(long exp, long act, const char* file, int line) {
-  if(exp != act) {
-    expectation_passed();
-  } else {
+  if(exp == act)
     refute_equal_failed(exp, act, file, line);
-  }
+  else
+    expectation_passed();
 }
 
 int is_equal_string(const char* lhs, const char* rhs) {
@@ -135,43 +133,38 @@ void _expect_equal_string(const char* exp, const char* act, const char* file, in
 }
 
 void _refute_equal_string(const char* exp, const char* act, const char* file, int line) {
-  if (either_or_both_is_null(exp, act) || is_equal_string(exp, act))  { 
+  if (either_or_both_is_null(exp, act) || is_equal_string(exp, act))
     refute_equal_string_failed(exp, act, file, line);
-  } else {
+  else
     expectation_passed();
-  }
 }
 
 void _expect_true(int act, const char* file, int line) {
-  if((act) == 0)  {
+  if((act) == 0)
     expect_true_failed(act, file, line);
-  } else {
+  else
     expectation_passed();
-  }
 }
 
 void _expect_false(int act, const char* file, int line) {
-  if((act) != 0)  {
-    expect_false_failed(act, file, line);
-  } else {
+  if((act) == 0)
     expectation_passed();
-  }
+  else
+    expect_false_failed(act, file, line);
 }
 
 void _expect_null(void *act, const char* file, int line) {
-  if((act) != NULL) {
-    expect_null_failed(act, file, line);
-  } else {
+  if((act) == NULL)
     expectation_passed();
-  }
+  else
+    expect_null_failed(act, file, line);
 }
 
 void _refute_null(void *act, const char* file, int line) {
-  if((act) == NULL) {
+  if((act) == NULL)
     refute_null_failed(act, file, line);
-  } else {
+  else
     expectation_passed();
-  }
 }
 
 /*------spec functions--------*/
