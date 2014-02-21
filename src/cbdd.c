@@ -20,9 +20,11 @@
 
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
+static int before_all_block_been_called = 0;
 
-static void (^before_block)();
-static void (^after_block)();
+static void (^before_each_block)();
+static void (^after_each_block)();
+static void (^before_all_block)();
 
 /* Displyer is a 'role' that can be played by any module that implements
  * displayer.h inteface */
@@ -185,23 +187,33 @@ void _refute_null(void *act, const char* file, int line) {
 void describe(const char *string, void (^block)()) {
   Displayer_display_describe_name(string);
   block();
-  before_block = NULL;
-  after_block = NULL;
+  before_each_block = NULL;
+  after_each_block = NULL;
 }
 
 void it(const char *string, void (^block)()) {
-  if(before_block) before_block();
+  //if before_all_called has been called once dont call it
+  if(!before_all_block_been_called && before_all_block) {
+    before_all_block();
+    before_all_block_been_called = 1;
+  }
+
+  if(before_each_block) before_each_block();
   Displayer_display_example_name(string);
   block();
-  if(after_block) after_block();
+  if(after_each_block) after_each_block();
 }
 
 void before_each(void (^block)()) {
-  before_block = block;
+  before_each_block = block;
 }
 
 void after_each(void (^block)()) {
-  after_block = block;
+  after_each_block = block;
+}
+
+void before_all(void (^block)()) {
+  before_all_block = block;
 }
 
 /*-------private functions------*/

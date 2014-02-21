@@ -100,6 +100,26 @@ void test_after_each_runs_after_every_it_block() {
   assert(22 == global_state);
 }
 
+void test_before_all_runs_before_all_it_blocks() {
+  __block int global_state = 1001;
+  describe("test for before_all", ^{
+  before_all(^{
+    global_state = 33;
+  });
+
+    it("", ^{
+      assert(33 == global_state);
+      global_state = 113;
+    });
+
+    it("", ^{
+      assert(113 == global_state);
+      global_state = 747;
+    });
+  });
+  assert(747 == global_state);
+}
+
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
@@ -245,6 +265,7 @@ int main() {
   run_test(test_before_each_runs_before_every_it_block);
   run_test(test_before_each_only_runs_within_its_describe_context);
   run_test(test_after_each_runs_after_every_it_block);
+  run_test(test_before_all_runs_before_all_it_blocks);
 
   /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
