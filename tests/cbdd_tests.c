@@ -103,9 +103,9 @@ void test_after_each_runs_after_every_it_block() {
 void test_before_all_runs_before_all_it_blocks() {
   __block int global_state = 1001;
   describe("test for before_all", ^{
-  before_all(^{
-    global_state = 33;
-  });
+    before_all(^{
+      global_state = 33;
+    });
 
     it("", ^{
       assert(33 == global_state);

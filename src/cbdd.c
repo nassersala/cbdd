@@ -20,7 +20,7 @@
 
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
-static int before_all_block_been_called = 0;
+static int BEFORE_ALL_CALLED = 0;
 
 static void (^before_each_block)();
 static void (^after_each_block)();
@@ -184,20 +184,27 @@ void _refute_null(void *act, const char* file, int line) {
 }
 
 /*------spec functions--------*/
+void clear_global_blocks() {
+  before_each_block = NULL;
+  after_each_block = NULL;
+  before_all_block = NULL;
+}
+
 void describe(const char *string, void (^block)()) {
   Displayer_display_describe_name(string);
   block();
-  before_each_block = NULL;
-  after_each_block = NULL;
+  clear_global_blocks();
+}
+
+void exec_before_all_block_once() {
+  if(!BEFORE_ALL_CALLED && before_all_block) {
+    before_all_block();
+    BEFORE_ALL_CALLED = 1;
+  }
 }
 
 void it(const char *string, void (^block)()) {
-  //if before_all_called has been called once dont call it
-  if(!before_all_block_been_called && before_all_block) {
-    before_all_block();
-    before_all_block_been_called = 1;
-  }
-
+  exec_before_all_block_once();
   if(before_each_block) before_each_block();
   Displayer_display_example_name(string);
   block();
