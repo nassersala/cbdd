@@ -28,7 +28,7 @@ static void color_print(const char* color, const char* text) {
 }
 
 void  displays_describe_name_before_describe_block(const char* desc) {
-  color_print(ANSI_COLOR_MAGENTA, desc);
+  color_print(ANSI_COLOR_REST, desc);
 }
 
 void displays_example_name_before_it_block(const char* example) {
