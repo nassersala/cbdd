@@ -20,11 +20,13 @@
 
 //used by the tests only
 static int EXPECTATION_FAILED = 0;
+
 static int BEFORE_ALL_CALLED = 0;
 
 static void (^before_each_block)();
 static void (^after_each_block)();
 static void (^before_all_block)();
+static void (^after_all_block)();
 
 /* Displyer is a 'role' that can be played by any module that implements
  * displayer.h inteface */
@@ -188,23 +190,30 @@ void clear_global_blocks() {
   before_each_block = NULL;
   after_each_block = NULL;
   before_all_block = NULL;
+  after_all_block = NULL;
 }
 
-void describe(const char *string, void (^block)()) {
-  Displayer_display_describe_name(string);
-  block();
-  clear_global_blocks();
-}
-
-void exec_before_all_block_once() {
+void exec_the_before_all_block_once() {
   if(!BEFORE_ALL_CALLED && before_all_block) {
     before_all_block();
     BEFORE_ALL_CALLED = 1;
   }
 }
 
+void describe(const char *string, void (^block)()) {
+  Displayer_display_describe_name(string);
+  block();
+
+  if(after_all_block) after_all_block();
+
+  clear_global_blocks();
+
+  //clear it so it will work with other describe blocks
+  BEFORE_ALL_CALLED = 0;
+}
+
 void it(const char *string, void (^block)()) {
-  exec_before_all_block_once();
+  exec_the_before_all_block_once();
   if(before_each_block) before_each_block();
   Displayer_display_example_name(string);
   block();
@@ -221,6 +230,10 @@ void after_each(void (^block)()) {
 
 void before_all(void (^block)()) {
   before_all_block = block;
+}
+
+void after_all(void (^block)()) {
+  after_all_block = block;
 }
 
 /*-------private functions------*/

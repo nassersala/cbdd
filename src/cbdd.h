@@ -17,6 +17,7 @@ void it(const char *string, void (^block)());
 void before_each(void (^block)());
 void after_each(void (^block)());
 void before_all(void (^block)());
+void after_all(void (^block)());
 
 /*----expectations------*/
 void _expect_equal(long exp, long act, const char* file, int line);

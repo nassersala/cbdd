@@ -102,7 +102,7 @@ void test_after_each_runs_after_every_it_block() {
 
 void test_before_all_runs_before_all_it_blocks() {
   __block int global_state = 1001;
-  describe("test for before_all", ^{
+  describe("before_all executed only once", ^{
     before_all(^{
       global_state = 33;
     });
@@ -118,6 +118,50 @@ void test_before_all_runs_before_all_it_blocks() {
     });
   });
   assert(747 == global_state);
+}
+
+//TODO: change the name to 
+//test befor_all is relavant to its describe block
+void test_before_all_runs_within_its_describe_context() {
+  __block int global_state = 1001;
+  describe("before_all executed only once", ^{
+    before_all(^{
+      global_state = 33;
+    });
+
+    it("", ^{
+      printf("the global state is %d\n", global_state);
+      assert(33 == global_state);
+      global_state = 113;
+    });
+
+    it("", ^{
+      assert(113 == global_state);
+      global_state = 747;
+    });
+  });
+  assert(747 == global_state);
+}
+
+
+void test_after_all_runs_after_all_it_block() {
+  __block int close_file = 1001;
+  describe("after_all executed after all it()", ^{
+    after_all(^{
+      close_file = 1;
+    });
+
+    it("", ^{
+      assert(1001 == close_file);
+      close_file = 113;
+    });
+
+    it("", ^{
+      assert(113 == close_file);
+      close_file = 747;
+    });
+  });
+  assert(1 == close_file);
 }
 
 /*------expectations tests---------*/
@@ -266,6 +310,8 @@ int main() {
   run_test(test_before_each_only_runs_within_its_describe_context);
   run_test(test_after_each_runs_after_every_it_block);
   run_test(test_before_all_runs_before_all_it_blocks);
+  run_test(test_before_all_runs_within_its_describe_context);
+  run_test(test_after_all_runs_after_all_it_block);
 
   /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);
