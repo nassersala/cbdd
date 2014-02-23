@@ -96,7 +96,7 @@ from [Wikipedia](http://en.wikipedia.org/wiki/Behavior-driven_development)
 ## Crafted By:
 Nasser Ali Alzahrani [@nassersala](http://twitter.com/nassersala)
 
-![cbdd logo](img/cbdd-logo.png "CBDD logo")
-
 ## License
 Licensed under the Apache License, Version 2.0
+
+![cbdd logo](img/cbdd-logo.png "CBDD logo")
