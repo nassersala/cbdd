@@ -1,6 +1,5 @@
 ##CBDD allows you to write elegant and expressive tests in C
 
-----
 # usage
     #include <cbdd.h>
 
@@ -80,7 +79,6 @@ the previous example would have been compiled as follows:
     expect_null(exp)
     refute_null(exp)
 
-----
 ##before_each and sisters
     before_each(^{}) //runs before every test in a describe block
     after_each(^{})  //runs after every test
@@ -88,7 +86,6 @@ the previous example would have been compiled as follows:
     after_all(^{})   //runs once after all tests
 
 
-----
 ## what is BDD?
 from [Wikipedia](http://en.wikipedia.org/wiki/Behavior-driven_development)
 
@@ -96,11 +93,9 @@ from [Wikipedia](http://en.wikipedia.org/wiki/Behavior-driven_development)
 
 
 
-----
 ## Crafted By:
 Nasser Ali Alzahrani [@nassersala](http://twitter.com/nassersala)
 
 
-----
 ## License
 Licensed under the Apache License, Version 2.0
