@@ -23,6 +23,8 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+#define TEXT_SIZE 256
+
 static void color_print(const char* color, const char* text) {
   printf("%s%s"ANSI_COLOR_RESET"\n", color, text);
 }
@@ -41,50 +43,50 @@ void displays_example_passed() {
 }
 
 void displays_expect_equal_failed(long exp, long act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected: %ld\ngot: %ld\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 
 void displays_refute_equal_failed(long actual, long expected, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected (%ld) and (%ld) not to be equal\n%s:%d", expected, actual, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_string_equal_failed(const char*exp, const char*act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected: %s\ngot: %s\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_string_refute_failed(const char*exp, const char*act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected \"%s\" not to equal \"%s\"\n%s:%d", exp, act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_expect_true_failed(int act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected %d to be true, got false\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_expect_false_failed(int act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected %d to be false, got true\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_expect_null_failed(void *act, const char*file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nexpected %p to point to NULL\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
 
 void displays_refute_null_failed(void *act, const char* file, int line) {
-  char text[80];
+  char text[TEXT_SIZE];
   sprintf(text, "FAILED\nunexpected null\ngot: %p\n%s:%d", act, file, line);
   color_print(ANSI_COLOR_RED, text);
 }
