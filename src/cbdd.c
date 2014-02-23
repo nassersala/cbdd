@@ -207,8 +207,6 @@ void describe(const char *string, void (^block)()) {
   if(after_all_block) after_all_block();
 
   clear_global_blocks();
-
-  //clear it so it will work with other describe blocks
   BEFORE_ALL_CALLED = 0;
 }
 
