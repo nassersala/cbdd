@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#ifndef CBDD_H
+#define CBDD_H
+
 void describe(const char *string, void (^block)());
 void it(const char *string, void (^block)());
 void before_each(void (^block)());
@@ -46,3 +49,5 @@ void _refute_null(void *act, const char* file, int line);
 
 //this is used by the lib tests
 int cbdd_expectation_failed();
+
+#endif
