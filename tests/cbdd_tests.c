@@ -187,6 +187,34 @@ void test_before_all_with_before_each_with_after_all() {
   assert(7 == global_state);
 }
 
+void test_context_is_alias_to_describe() {
+  __block int global_state = 232;
+  context("just to test wrapping of a describe", ^{
+    describe("context function", ^{
+      context("test that context behaves like describe", ^{
+        before_each(^{
+          global_state = 2;
+        });
+
+        after_each(^{
+          global_state = 99;
+        });
+
+        after_all(^{
+          global_state = 360;
+        });
+
+        global_state = 393821;
+        it("inside the context", ^{
+          assert(2 == global_state);
+        });
+        assert(99 == global_state);
+      });
+    });
+  });
+  assert(360 == global_state);
+}
+
 /*------expectations tests---------*/
 void test_expect_equal_can_pass() {
   expect_equal(1, 1);
@@ -336,6 +364,7 @@ int main() {
   run_test(test_before_all_runs_within_its_describe_context);
   run_test(test_before_all_with_before_each_with_after_all);
   run_test(test_after_all_runs_after_all_it_block);
+  run_test(test_context_is_alias_to_describe);
 
   /*------expectations tests---------*/
   run_test(test_expect_equal_can_pass);

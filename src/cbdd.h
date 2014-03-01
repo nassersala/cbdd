@@ -16,6 +16,7 @@
 #define CBDD_H
 
 void describe(const char *string, void (^block)());
+void context(const char *string, void (^block)());
 void it(const char *string, void (^block)());
 void before_each(void (^block)());
 void after_each(void (^block)());

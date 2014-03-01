@@ -37,7 +37,7 @@ running the test is just **as simple as compiling a C program**:
     main.c:17
 
 ## Features
-* Beautiful syntax.
+* Beautiful Rspec like syntax.
 * Tests are executed at the spot where they were defined. In other words, there is no need for explicit test runners. Think of how many times you have written a test but forgot to call it.
 * No marco hacks. describe(), it() etc...  are all pure C functions. 
 * Flexible, since every module's tests are within a main() function, the choice is open for how to run them. For example, you might want to write a simple bash script to compile all files ending with '_tests'

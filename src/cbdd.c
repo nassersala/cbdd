@@ -210,6 +210,10 @@ void describe(const char *string, void (^block)()) {
   BEFORE_ALL_CALLED = 0;
 }
 
+void context(const char *string, void (^block)()) {
+  describe(string, block);
+}
+
 void it(const char *string, void (^block)()) {
   exec_the_before_all_block_once();
   if(before_each_block) before_each_block();
