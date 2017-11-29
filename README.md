@@ -1,4 +1,4 @@
-##CBDD allows you to write elegant and expressive tests in C
+## CBDD allows you to write elegant and expressive tests in C
 
 # usage
     #include <cbdd.h>
@@ -45,7 +45,7 @@ running the test is just **as simple as compiling a C program**:
 
 
 ## Installation
-#Mac 
+# Mac 
 clone the repo:
     
     git clone https://github.com/nassersala/cbdd.git
@@ -58,7 +58,7 @@ build and install:
     $make 
     $make install
 
-#Linux
+# Linux
 before 'make' and 'make install', you need to have llvm, clang and BlocksRuntime installed:
 
     $sudo apt-get install llvm
@@ -69,7 +69,7 @@ the previous example would have been compiled as follows:
 
     $clang test.c -fblocks -lBlocksRuntime -lcbdd
 
-##Available expectations
+## Available expectations
     expect_equal(exp, act)
     refute_equal(exp, act) //expect not equal
     expect_equal_string(str1, str2) 
@@ -79,7 +79,7 @@ the previous example would have been compiled as follows:
     expect_null(exp)
     refute_null(exp)
 
-##before_each and sisters
+## before_each and sisters
     before_each(^{}) //runs before every test in a describe block
     after_each(^{})  //runs after every test
     before_all(^{})  //runs once before all tests 
